@@ -5,3 +5,4 @@ Takes as input an image that has a picture of person, animal, random, etc, with 
 
 
 ![alt text](bird2.jpeg)
+![alt text](bird52.jpeg)
