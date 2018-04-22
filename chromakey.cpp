@@ -8,18 +8,10 @@
  Usage: program_name in.bmp background.bmp dist_threshold out1.bmp out2.bmp
 
  Notes:
- This program performs the chroma key operation on an wqainput 
+ This program performs the chroma key operation on an input 
  using two different methods.
 
- Method 1 Utilize a user-defined distance threshold from the
-          chromakey value as a discriminator
-
- Method 2 Devise a method that to determine the chromakey mask
-          that doesn't require a user-input threshold
-
 ********************************************************************/
-// Colbert Thresold value =~ 70.5
-
 
 
 #include <cstdio>
@@ -30,9 +22,6 @@
 
 using namespace std;
 
-// Prototypes
-// IMPORTANT: you must exactly use these input types, function names, and 
-// return types. Otherwise the grader can't test them.
 void method1(unsigned char inImage[][SIZE][RGB], 
 	     bool mask[][SIZE],
 	     double threshold);
@@ -47,10 +36,7 @@ void replace(bool mask[][SIZE],
 
 int main(int argc, char *argv[])
 {
-  // Image data array
-  // Note:  DON'T use the static keyword except where we expressly say so.
-  //        It puts the large array in a separate, fixed, area of memory. 
-  //        It is bad practice. But useful until we have dynamic allocation.
+
   static unsigned char inputImage[SIZE][SIZE][RGB];
   static unsigned char bgrndImage[SIZE][SIZE][RGB];
   static unsigned char outputImage[SIZE][SIZE][RGB];
@@ -74,8 +60,6 @@ int main(int argc, char *argv[])
     return 1;
   }
   
-  // Write code to convert the threshold (argv[3])
-  //  from string format to a double and assign the 'threshold'
 
   threshold = atof(argv[3]);
 
@@ -86,17 +70,6 @@ int main(int argc, char *argv[])
   replace(chromaMask, inputImage, bgrndImage,
   	     outputImage);
 
-  /*for(int i=0; i<SIZE; i++){	
-		for(int j=0; j<SIZE; j++){
-			//for (int color = 0; color < 3; ++color)
-			//{
-			//	cout << (int) inputImage[i][j][color] << endl;
-			//}
-			cout << chromaMask [i][j] << endl;
-			  
-		}
-	  }
-*/
   // Write the output image to a file using the filename argv[4]
   if (writeRGBBMP(argv[4], outputImage)) {
     cout << "Error writing file: " << argv[4] << endl;
@@ -162,8 +135,7 @@ void method1(unsigned char inImage[][SIZE][RGB],
 
 }
 
-// Devise a method to automatically come up with a threshold
-//  for the chroma key determination
+
 // The "output" of this method is to produce a valid mask array
 //  where entries in the mask array are 1 for foreground image
 //  and 0 for 'background'
